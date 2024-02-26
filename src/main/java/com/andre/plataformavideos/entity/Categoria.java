@@ -1,6 +1,8 @@
 package com.andre.plataformavideos.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +15,12 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Título não pode estar em branco")
     private String titulo;
+
+    @NotBlank(message = "Cor não pode estar em branco")
+    @Pattern(regexp = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" , message = "Entre com um padrão de cor Hexadecimal válido")
     private String cor;
 
     @OneToMany(mappedBy = "categoria")

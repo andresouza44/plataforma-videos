@@ -13,17 +13,29 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class VideoService {
 
     @Autowired
     VideoRepostitory repostitory;
 
+
     @Transactional(readOnly = true)
     public Page<VideoDto> findAll (Pageable pageable){
+        System.out.println(pageable);
         Page<Video> result = repostitory.findAll(pageable);
+        System.out.println(result);
         return  result.map(video -> new VideoDto(video));
     }
+/*
+
+    @Transactional(readOnly = true)
+    public List<VideoDto> findAll (){
+        List<Video> videos = repostitory.findAll();
+        return  videos.stream().map(VideoDto::new).toList();
+    }*/
 
     @Transactional(readOnly = true)
     public  VideoDto findById(Long id){
@@ -45,25 +57,18 @@ public class VideoService {
     public VideoDto updateVideo (Long id, VideoDto dto) {
 
         try{
-            //Video entity = repostitory.findById(id).get();
             Video entity = repostitory.getReferenceById(id);
-            System.out.println("Service: " + entity);
+
             if (dto.getTitulo() != null) entity.setTitulo(dto.getTitulo());
             if(dto.getDescricao() != null) entity.setDescricao(dto.getDescricao());
             if (dto.getUrl() != null) entity.setUrl(dto.getUrl());
-
             repostitory.save(entity);
-            System.out.println("Service atualizado: " + entity);
-
 
             return new VideoDto(entity);
 
-
         }catch (EntityNotFoundException e){
             throw  new ResourceNotFoundException("Video not found with id: " + id);
-
         }
-
     }
 
     public void deleteById (Long id){

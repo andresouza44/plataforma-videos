@@ -1,6 +1,8 @@
 package com.andre.plataformavideos;
 
+import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.entity.Video;
+import com.andre.plataformavideos.repositories.CategoriaRepository;
 import com.andre.plataformavideos.repositories.VideoRepostitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +16,10 @@ import java.util.Arrays;
 public class TestConfig implements CommandLineRunner {
 
     @Autowired
-    private VideoRepostitory repostitory;
+    private VideoRepostitory videoRepostitory;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -34,6 +39,21 @@ public class TestConfig implements CommandLineRunner {
         video3.setDescricao("Como REMOVER os BLOATWARES do Windows em 2 cliques!!");
         video3.setUrl("https://youtu.be/D6h-aveKM7U?si=774Wt7aOIRm1SZ_V");
 
-        repostitory.saveAll(Arrays.asList(video1,video3,video4));
+        videoRepostitory.saveAll(Arrays.asList(video1,video3,video4));
+
+        Categoria categoria1 = new Categoria();
+        categoria1.setTitulo("LIVRE");
+        categoria1.setCor("#FFFFFF"); // WHITE
+
+        Categoria categoria2 = new Categoria();
+        categoria2.setTitulo("Educativos");
+        categoria2.setCor("#00FFFF"); // Ciano
+
+        Categoria categoria3 = new Categoria();
+        categoria3.setTitulo("Lives");
+        categoria3.setCor("#FFFFCC"); // Amarelo Claro
+
+        categoriaRepository.saveAll(Arrays.asList(categoria1,categoria2,categoria3));
     }
+
 }

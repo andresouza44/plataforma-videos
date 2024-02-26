@@ -1,5 +1,6 @@
 package com.andre.plataformavideos.dto;
 
+import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.entity.Video;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -22,6 +23,8 @@ public class VideoDto {
     @URL(message="Adicione uma URL Válida")
     private String url;
 
+    private Categoria categoria;
+
 
     public VideoDto(){
 
@@ -30,16 +33,18 @@ public class VideoDto {
     public VideoDto(Video video){
         this.id = video.getId();
 
-
         this.titulo = video.getTitulo();
         this.descricao = video.getDescricao();
         this.url = video.getUrl();
+        this.categoria = video.getCategoria();
     }
-    public VideoDto(Long id, String titulo, String descricao, String url) {
+    public VideoDto(Long id, String titulo, String descricao, String url, Categoria categoria) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
+        this.categoria = categoria;
+
     }
 
     public Long getId() {
@@ -73,6 +78,11 @@ public class VideoDto {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
 
     @Override
     public String toString() {

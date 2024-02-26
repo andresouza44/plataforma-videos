@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/videos")
@@ -26,9 +27,17 @@ public class VideoController {
         return ResponseEntity.ok(pages);
     }
 
+   /* @GetMapping
+    public ResponseEntity<List<VideoDto>> findAll (){
+        List<VideoDto> dto = service.findAll();
+        return ResponseEntity.ok(dto);
+    }
+*/
+
     @GetMapping(value = "/{id}")
     public ResponseEntity <VideoDto> findById (@PathVariable Long id){
         VideoDto dto = service.findById(id);
+
         return  ResponseEntity.ok(dto);
 
         }
@@ -43,15 +52,14 @@ public class VideoController {
     }
 
     @PutMapping (value = "/{id}")
-    public ResponseEntity<VideoDto> updateVideo (@PathVariable  Long id, @RequestBody VideoDto dto){
+    public ResponseEntity<VideoDto> updateVideo ( @Valid @PathVariable  Long id, @RequestBody VideoDto dto){
         VideoDto result = service.updateVideo(id, dto);
-        System.out.println("Controller atuallizado" +dto);
         return ResponseEntity.ok(dto);
 
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteById(@PathVariable Long id){
+    public ResponseEntity deleteById( @PathVariable Long id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }

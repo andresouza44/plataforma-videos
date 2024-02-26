@@ -73,4 +73,14 @@ public class Video {
         result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "Id=" + Id +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

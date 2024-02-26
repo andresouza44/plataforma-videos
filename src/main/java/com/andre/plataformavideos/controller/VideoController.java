@@ -1,15 +1,17 @@
 package com.andre.plataformavideos.controller;
 
 import com.andre.plataformavideos.dto.VideoDto;
+import com.andre.plataformavideos.entity.Video;
 import com.andre.plataformavideos.service.VideoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/videos")
@@ -31,6 +33,22 @@ public class VideoController {
 
         }
 
+    @PostMapping
+    public ResponseEntity<VideoDto> createVideo (@Valid @RequestBody VideoDto dto){
+        dto = service.createVideo(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(dto.getId()).toUri();
+        return  ResponseEntity.created(uri).body(dto);
+
+    }
+
+    @PutMapping (value = "/{id}")
+    public ResponseEntity<VideoDto> updateVideo (@PathVariable  Long id, @RequestBody VideoDto dto){
+        VideoDto result = service.updateVideo(id, dto);
+        System.out.println("Controller atuallizado" +dto);
+        return ResponseEntity.ok(dto);
+
+    }
 
     }
 

@@ -6,6 +6,8 @@ import com.andre.plataformavideos.exceptional.ResourceNotFoundException;
 import com.andre.plataformavideos.repositories.VideoRepostitory;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -62,6 +64,17 @@ public class VideoService {
 
         }
 
+    }
+
+    public void deleteById (Long id){
+        if (!repostitory.existsById(id)){
+            throw new ResourceNotFoundException("Video not found with id: " + id);
+        }
+        try{
+            repostitory.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw  new DataIntegrityViolationException("Data Integrity Violation Excpetion" + e.getMessage());
+        }
 
     }
 }

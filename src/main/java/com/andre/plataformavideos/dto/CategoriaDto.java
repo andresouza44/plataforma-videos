@@ -13,6 +13,8 @@ public class CategoriaDto {
 
     private List<Video> videos;
 
+    public CategoriaDto(){
+    }
     public CategoriaDto(Categoria categoria){
         this.id = categoria.getId();
         this.titulo = categoria.getTitulo();

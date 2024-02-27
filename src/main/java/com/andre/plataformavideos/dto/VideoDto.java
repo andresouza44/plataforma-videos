@@ -22,22 +22,27 @@ public class VideoDto {
     @URL(message="Adicione uma URL Válida")
     private String url;
 
-    private Categoria categoria;
+    private CategoriaDto categoria;
 
 
     public VideoDto(){
 
     }
 
-    public VideoDto(Video video){
-        this.id = video.getId();
+    public VideoDto(Video video) {
+        id = video.getId();
+        titulo = video.getTitulo();
+        descricao = video.getDescricao();
+        url = video.getUrl();
 
-        this.titulo = video.getTitulo();
-        this.descricao = video.getDescricao();
-        this.url = video.getUrl();
-        this.categoria = video.getCategoria();
+        if (video.getCategoria() == null) {
+            categoria = new CategoriaDto();
+            categoria.setId(1L);
+        }
+        categoria = new CategoriaDto(video.getCategoria());
     }
-    public VideoDto(Long id, String titulo, String descricao, String url, Categoria categoria) {
+
+    public VideoDto(Long id, String titulo, String descricao, String url, CategoriaDto categoria) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -78,10 +83,13 @@ public class VideoDto {
         this.url = url;
     }
 
-    public Categoria getCategoria() {
+    public CategoriaDto getCategoria() {
         return categoria;
     }
 
+    public void setCategoria(CategoriaDto categoria) {
+        this.categoria = categoria;
+    }
 
     @Override
     public String toString() {

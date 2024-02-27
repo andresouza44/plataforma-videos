@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Categoria {
@@ -24,7 +21,7 @@ public class Categoria {
     private String cor;
 
     @OneToMany(mappedBy = "categoria")
-    private Set<Video> video = new HashSet<>();
+    private List<Video> video = new ArrayList<>();
 
     public Categoria(){
 
@@ -60,7 +57,7 @@ public class Categoria {
         this.cor = cor;
     }
 
-    public Set<Video> getVideo() {
+    public List<Video> getVideo() {
         return video;
     }
 

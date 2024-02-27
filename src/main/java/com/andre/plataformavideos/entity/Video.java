@@ -14,7 +14,6 @@ public class Video {
     private String descricao;
     private String url;
 
-
     @ManyToOne
     @JoinColumn(name = "categoriaId")
     private Categoria categoria;
@@ -23,11 +22,13 @@ public class Video {
     public  Video(){
 
     }
-    public Video(Long id, String titulo, String descricao, String url) {
+
+    public Video(Long id, String titulo, String descricao, String url, Categoria categoria) {
         Id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -68,6 +69,7 @@ public class Video {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+
     }
 
     @Override

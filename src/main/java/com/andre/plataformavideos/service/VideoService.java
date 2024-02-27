@@ -1,8 +1,12 @@
 package com.andre.plataformavideos.service;
 
+import com.andre.plataformavideos.dto.CategoriaDto;
 import com.andre.plataformavideos.dto.VideoDto;
+import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.entity.Video;
+import com.andre.plataformavideos.exceptions.CategoriaNotFoundException;
 import com.andre.plataformavideos.exceptions.ResourceNotFoundException;
+import com.andre.plataformavideos.repositories.CategoriaRepository;
 import com.andre.plataformavideos.repositories.VideoRepostitory;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,9 @@ public class VideoService {
 
     @Autowired
     VideoRepostitory repostitory;
+
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
 
   /*  @Transactional(readOnly = true)
@@ -42,24 +49,35 @@ public class VideoService {
         return  new VideoDto(video);
     }
 
+    @Transactional(readOnly = true)
     public VideoDto createVideo(VideoDto videoDto){
         Video video = new Video();
         video.setTitulo(videoDto.getTitulo());
         video.setDescricao(videoDto.getDescricao());
         video.setUrl(videoDto.getUrl());
+        if (videoDto.getCategoria() == null) {
+            saveCategoria(video, 1L);
+
+        }
+        else {
+            Long categoriaId =  videoDto.getCategoria().getId();
+            saveCategoria(video, categoriaId);
+
+        }
         repostitory.save(video);
         return  new VideoDto(video);
-
     }
+
     @Transactional
     public VideoDto updateVideo (Long id, VideoDto dto) {
-
         try{
             Video entity = repostitory.getReferenceById(id);
 
             if (dto.getTitulo() != null) entity.setTitulo(dto.getTitulo());
-            if(dto.getDescricao() != null) entity.setDescricao(dto.getDescricao());
+            if (dto.getDescricao() != null) entity.setDescricao(dto.getDescricao());
             if (dto.getUrl() != null) entity.setUrl(dto.getUrl());
+            if (dto.getCategoria() != null) saveCategoria(entity,dto.getCategoria().getId());
+
             repostitory.save(entity);
 
             return new VideoDto(entity);
@@ -78,6 +96,19 @@ public class VideoService {
         }catch (DataIntegrityViolationException e){
             throw  new DataIntegrityViolationException("Data Integrity Violation Excpetion" + e.getMessage());
         }
+    }
 
+    private void saveCategoria(Video entity, Long id){
+        if(!categoriaRepository.existsById(id)) {
+            throw new CategoriaNotFoundException("Categoria not found with id: " + id);
+        }
+        try {
+                Categoria categoria = categoriaRepository.findById(id).get();
+                entity.setCategoria(categoria);
+
+        }catch (NullPointerException | EntityNotFoundException e) {
+            throw  new CategoriaNotFoundException("Categoria not found with id: " + id);
+
+        }
     }
 }

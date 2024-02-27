@@ -16,7 +16,6 @@ public class VideoDto {
     private String titulo;
 
     @NotBlank (message = "Campo requerido")
-
     private String descricao;
 
     @NotBlank (message = "Campo requerido")

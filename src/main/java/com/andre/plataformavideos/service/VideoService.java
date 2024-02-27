@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class VideoService {
 
@@ -19,20 +21,19 @@ public class VideoService {
     VideoRepostitory repostitory;
 
 
-    @Transactional(readOnly = true)
+  /*  @Transactional(readOnly = true)
     public Page<VideoDto> findAll (Pageable pageable){
         System.out.println(pageable);
         Page<Video> result = repostitory.findAll(pageable);
         System.out.println(result);
         return  result.map(video -> new VideoDto(video));
-    }
-/*
+    }*/
 
     @Transactional(readOnly = true)
     public List<VideoDto> findAll (){
         List<Video> videos = repostitory.findAll();
         return  videos.stream().map(VideoDto::new).toList();
-    }*/
+    }
 
     @Transactional(readOnly = true)
     public  VideoDto findById(Long id){

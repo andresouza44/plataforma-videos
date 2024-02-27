@@ -16,23 +16,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/videos")
+@CrossOrigin("*")
 public class VideoController {
 
     @Autowired
     private VideoService service;
 
-    @GetMapping
+  /*  @GetMapping
     public ResponseEntity<Page<VideoDto>> findAll (Pageable pageable) {
         Page<VideoDto> pages = service.findAll(pageable);
         return ResponseEntity.ok(pages);
     }
-
-   /* @GetMapping
+*/
+    @GetMapping
     public ResponseEntity<List<VideoDto>> findAll (){
         List<VideoDto> dto = service.findAll();
         return ResponseEntity.ok(dto);
     }
-*/
 
     @GetMapping(value = "/{id}")
     public ResponseEntity <VideoDto> findById (@PathVariable Long id){

@@ -81,4 +81,14 @@ public class Categoria {
         result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", cor='" + cor + '\'' +
+                ", video=" + video +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.andre.plataformavideos.dto;
 
+import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.entity.Video;
 
 import java.util.List;
@@ -12,7 +13,10 @@ public class CategoriaDto {
 
     private List<Video> videos;
 
-    public CategoriaDto(){
+    public CategoriaDto(Categoria categoria){
+        this.id = categoria.getId();
+        this.titulo = categoria.getTitulo();
+        this.cor = categoria.getCor();
 
     }
 
@@ -66,5 +70,15 @@ public class CategoriaDto {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoriaDto{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", cor='" + cor + '\'' +
+                ", videos=" + videos +
+                '}';
     }
 }

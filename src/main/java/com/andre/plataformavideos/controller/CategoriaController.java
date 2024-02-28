@@ -33,7 +33,7 @@ public class CategoriaController {
     }
 
     @GetMapping(value = "/{id}/videos/")
-    public ResponseEntity <List<VideoDto>> getVideosBuCategoriaId(@PathVariable Long id){
+    public ResponseEntity <List<VideoDto>> getVideosByCategoriaId(@PathVariable Long id){
 
         List<VideoDto> videos = service.findVideosByCategoriaId(id);
         return ResponseEntity.ok(videos);

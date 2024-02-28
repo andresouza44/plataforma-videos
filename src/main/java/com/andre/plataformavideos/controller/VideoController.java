@@ -6,7 +6,9 @@ import com.andre.plataformavideos.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,16 +24,12 @@ public class VideoController {
     @Autowired
     private VideoService service;
 
-  /*  @GetMapping
-    public ResponseEntity<Page<VideoDto>> findAll (Pageable pageable) {
+    @GetMapping
+    public ResponseEntity<Page<VideoDto>> findAll (@RequestParam(name="size", defaultValue = "5") int size){
+        Pageable pageable = PageRequest.of(0,size);
         Page<VideoDto> pages = service.findAll(pageable);
         return ResponseEntity.ok(pages);
-    }
-*/
-    @GetMapping
-    public ResponseEntity<List<VideoDto>> findAll (){
-        List<VideoDto> dto = service.findAll();
-        return ResponseEntity.ok(dto);
+
     }
 
     @GetMapping(value = "/{id}")
@@ -41,6 +39,14 @@ public class VideoController {
         return  ResponseEntity.ok(dto);
 
         }
+
+    @GetMapping(value = "/")
+    public ResponseEntity <List<VideoDto>> searcheByTitulo (
+            @RequestParam(name="search", defaultValue = "") String titulo){
+        List<VideoDto> videoDtoList = service.findByTitulo(titulo);
+        return ResponseEntity.ok(videoDtoList);
+    }
+
 
     @PostMapping
     public ResponseEntity<VideoDto> createVideo (@Valid @RequestBody VideoDto dto){

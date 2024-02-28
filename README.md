@@ -12,14 +12,11 @@
 
 ### Validações / Regras de Negócio
 - Entidades Videos e Categorias não podem ter campos nulos
-- Título da Categoria não pode ser repitido 
+- Título da Categoria não pode ser repetido 
 
 
 ## ⚙️ Funcionalidades a serem implementadas:
 
-
-- API com rotas implementadas segundo o padrão REST.
-- Validações feitas conforme as regras de negócio.
 - Implementação de base de dados para persistência das informações.
 - Serviço de autenticação para acesso às rotas GET, POST, PUT e DELETE.
 

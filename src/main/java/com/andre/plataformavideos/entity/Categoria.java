@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import java.util.*;
 
 @Entity
+@Table(name = "tb_categoria")
 public class Categoria {
 
     @Id

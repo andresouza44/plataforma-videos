@@ -20,7 +20,7 @@ public class Categoria {
     @Pattern(regexp = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" , message = "Entre com um padrão de cor Hexadecimal válido")
     private String cor;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoria" )
     private List<Video> video = new ArrayList<>();
 
     public Categoria(){

@@ -1,6 +1,7 @@
 package com.andre.plataformavideos.controller;
 
 import com.andre.plataformavideos.dto.CategoriaDto;
+import com.andre.plataformavideos.dto.VideoDto;
 import com.andre.plataformavideos.service.CategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,14 @@ public class CategoriaController {
         CategoriaDto dto = service.FindById(id);
         return ResponseEntity.ok(dto);
     }
+
+    @GetMapping(value = "/{id}/videos/")
+    public ResponseEntity <List<VideoDto>> getVideosBuCategoriaId(@PathVariable Long id){
+
+        List<VideoDto> videos = service.findVideosByCategoriaId(id);
+        return ResponseEntity.ok(videos);
+    }
+
     @PostMapping
     public ResponseEntity<CategoriaDto> createCategoria (@RequestBody CategoriaDto dto){
         dto = service.createCategoria(dto);

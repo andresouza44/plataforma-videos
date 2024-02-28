@@ -58,6 +58,8 @@ public class TestConfig implements CommandLineRunner {
         video4.setUrl("https://youtu.be/bpPkRBt0L_8?si=jmwpwPyCgm09pEg6");
         video4.setCategoria(categoria1);
 
+
+
         videoRepostitory.saveAll(Arrays.asList(video1, video3, video4));
 
 

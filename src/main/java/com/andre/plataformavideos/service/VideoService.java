@@ -55,15 +55,15 @@ public class VideoService {
         video.setTitulo(videoDto.getTitulo());
         video.setDescricao(videoDto.getDescricao());
         video.setUrl(videoDto.getUrl());
-        if (videoDto.getCategoria() == null) {
-            saveCategoria(video, 1L);
 
+        if (videoDto.getCategoriaId() == null) {
+            saveCategoria(video, 1L);
         }
         else {
-            Long categoriaId =  videoDto.getCategoria().getId();
+            Long categoriaId =  videoDto.getCategoriaId();
             saveCategoria(video, categoriaId);
-
         }
+
         repostitory.save(video);
         return  new VideoDto(video);
     }
@@ -76,8 +76,8 @@ public class VideoService {
             if (dto.getTitulo() != null) entity.setTitulo(dto.getTitulo());
             if (dto.getDescricao() != null) entity.setDescricao(dto.getDescricao());
             if (dto.getUrl() != null) entity.setUrl(dto.getUrl());
-            if (dto.getCategoria() != null) saveCategoria(entity,dto.getCategoria().getId());
-
+        //    if (dto.getCategoria() != null) saveCategoria(entity,dto.getCategoria().getId());
+            if (dto.getCategoriaId() != null) saveCategoria(entity,dto.getCategoriaId());
             repostitory.save(entity);
 
             return new VideoDto(entity);

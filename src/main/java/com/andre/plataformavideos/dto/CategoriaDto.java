@@ -3,6 +3,7 @@ package com.andre.plataformavideos.dto;
 import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.entity.Video;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,15 +12,24 @@ public class CategoriaDto {
     private String titulo;
     private String cor;
 
-    private List<Video> videos;
+    private List<VideoDto> videos = new ArrayList<>();
 
     public CategoriaDto(){
     }
+
+    public CategoriaDto(Long id) {
+        this.id = id;
+    }
+
     public CategoriaDto(Categoria categoria){
         this.id = categoria.getId();
         this.titulo = categoria.getTitulo();
         this.cor = categoria.getCor();
 
+        for (Video video : categoria.getVideo()) {
+            VideoDto videoDto = new VideoDto(video);
+            videos.add(videoDto);
+        }
     }
 
     public CategoriaDto(Long id, String titulo, String cor) {
@@ -52,7 +62,7 @@ public class CategoriaDto {
         this.cor = cor;
     }
 
-    public List<Video> getVideos() {
+    public List<VideoDto> getVideos() {
         return videos;
     }
 

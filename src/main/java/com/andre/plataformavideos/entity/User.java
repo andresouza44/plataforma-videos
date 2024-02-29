@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name= "tb_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,7 +85,7 @@ public class User {
 
     public Boolean hasRole (String roleName){
         for (Role role : roles) {
-            if (role.getAuthoriry().equals(roleName)) {
+            if (role.getAuthority().equals(roleName)) {
                 return true;
             }
     }

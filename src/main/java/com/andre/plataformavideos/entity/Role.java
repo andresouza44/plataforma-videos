@@ -13,7 +13,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String authoriry;
+    private String authority;
 
     public Role(){
 
@@ -21,7 +21,7 @@ public class Role {
 
     public Role(Long id, String authoriry) {
         this.id = id;
-        this.authoriry = authoriry;
+        this.authority = authoriry;
     }
 
     public Long getId() {
@@ -32,12 +32,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getAuthoriry() {
-        return authoriry;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setAuthoriry(String authoriry) {
-        this.authoriry = authoriry;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
     @ManyToMany(mappedBy = "roles")
@@ -50,11 +50,11 @@ public class Role {
 
         Role role = (Role) o;
 
-        return Objects.equals(authoriry, role.authoriry);
+        return Objects.equals(authority, role.authority);
     }
 
     @Override
     public int hashCode() {
-        return authoriry != null ? authoriry.hashCode() : 0;
+        return authority != null ? authority.hashCode() : 0;
     }
 }

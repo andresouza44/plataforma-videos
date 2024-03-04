@@ -35,6 +35,7 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+/*
 
         Categoria categoria1 = new Categoria();
         categoria1.setTitulo("LIVRE");
@@ -99,6 +100,7 @@ public class TestConfig implements CommandLineRunner {
         userRepositiry.saveAll(Arrays.asList(user1,user2,user3));
 
 
+*/
 
     }
 }

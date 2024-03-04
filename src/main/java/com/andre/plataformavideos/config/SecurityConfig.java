@@ -13,15 +13,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
+   /* @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         return http.build();
 
     }
-
-    @Bean
+*/
+   /* @Bean
     @Profile("test")
     @Order(1)
     public SecurityFilterChain h2SecurityFilterChain(HttpSecurity http) throws Exception {
@@ -30,12 +30,13 @@ public class SecurityConfig {
         return http.build();
 
     }
+*/
 
-    @Bean
+   /* @Bean
     public PasswordEncoder getpassWordEncoder (){
         return  new BCryptPasswordEncoder();
     }
-
+*/
 
 }
 

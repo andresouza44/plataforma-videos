@@ -1,14 +1,19 @@
 package com.andre.plataformavideos.service;
 
+import com.andre.plataformavideos.dto.UserDTO;
 import com.andre.plataformavideos.entity.Role;
 import com.andre.plataformavideos.entity.User;
 import com.andre.plataformavideos.projections.UserDetailsProjection;
 import com.andre.plataformavideos.repositories.UserRepositiry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,11 +21,11 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private UserRepositiry repositiry;
+    private UserRepositiry repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<UserDetailsProjection> result = repositiry.searchUserAndRolesByEmail(username);
+        List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
         if (result.size() == 0){
             throw  new UsernameNotFoundException("User no found");
         }
@@ -32,4 +37,23 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+
+    protected User authenticated() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
+            String username = jwtPrincipal.getClaim("username");
+            return repository.findByEmail(username).get();
+
+        } catch (Exception e) {
+            throw new UsernameNotFoundException("Email not found");
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO getMe(){
+        User user = authenticated();
+        return new UserDTO(user);
+    }
+
 }

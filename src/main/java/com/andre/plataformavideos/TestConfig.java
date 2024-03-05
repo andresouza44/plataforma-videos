@@ -1,3 +1,4 @@
+/*
 package com.andre.plataformavideos;
 
 import com.andre.plataformavideos.entity.Categoria;
@@ -66,3 +67,4 @@ public class TestConfig implements CommandLineRunner {
 
     }
 }
+*/

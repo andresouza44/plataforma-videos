@@ -51,7 +51,7 @@ public class VideoService {
         return videos.stream().map(video -> new VideoDto(video)).toList();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public VideoDto createVideo(VideoDto videoDto){
         Video video = new Video();
         video.setTitulo(videoDto.getTitulo());

@@ -1,7 +1,7 @@
 package com.andre.plataformavideos.entity;
 
 public enum UserRole {
-    ADMIN ("admim"),
+    ADMIN ("admin"),
     USER("user");
 
    private String role;

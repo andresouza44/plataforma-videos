@@ -113,4 +113,14 @@ public class VideoService {
 
         }
     }
+
+    @Transactional(readOnly = true)
+    public List<VideoDto> findFreeVideos() {
+        List<Video> videos = repostitory.findAll()
+                .stream()
+                .limit(10)
+                .toList();
+
+        return videos.stream().map(e -> new VideoDto(e)).toList();
+    }
 }

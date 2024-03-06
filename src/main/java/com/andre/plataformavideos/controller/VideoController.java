@@ -32,6 +32,15 @@ public class VideoController {
 
     }
 
+    @GetMapping(value = "/free")
+    public ResponseEntity<List<VideoDto>> findFreeVideos (){
+        List<VideoDto> dtoList = service.findFreeVideos();
+        return ResponseEntity.ok(dtoList);
+
+
+
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity <VideoDto> findById (@PathVariable Long id){
         VideoDto dto = service.findById(id);

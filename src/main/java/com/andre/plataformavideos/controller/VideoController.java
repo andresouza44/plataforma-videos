@@ -54,6 +54,13 @@ public class VideoController {
         return ResponseEntity.ok(videoDtoList);
     }
 
+    @GetMapping(value = "/free")
+    public ResponseEntity<List<VideoDto>> freeVideos (){
+        List<VideoDto> videoDtos = service.getFreeVideos();
+        return ResponseEntity.ok(videoDtos);
+
+    }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<VideoDto> createVideo (@Valid @RequestBody VideoDto dto){

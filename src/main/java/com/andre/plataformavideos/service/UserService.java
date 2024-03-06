@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,4 +57,25 @@ public class UserService implements UserDetailsService {
         return new UserDTO(user);
     }
 
+    @Transactional
+    public UserDTO addNewUser(UserDTO dto) {
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+
+        String encryptPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
+        user.setPassword(encryptPassword);
+
+
+        if (dto.getRoles().isEmpty()){
+             user.addRole(new Role(2L,"ROLE_USER"));
+        }
+
+        dto.getRoles().forEach(role -> System.out.println(role));
+
+
+        repository.save(user);
+
+        return new UserDTO(user);
+    }
 }

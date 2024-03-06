@@ -20,6 +20,7 @@ public class Role implements GrantedAuthority {
 
     }
 
+
     public Role(Long id, String authoriry) {
         this.id = id;
         this.authority = authoriry;
@@ -58,5 +59,14 @@ public class Role implements GrantedAuthority {
     @Override
     public int hashCode() {
         return authority != null ? authority.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", authority='" + authority + '\'' +
+                ", users=" + users +
+                '}';
     }
 }

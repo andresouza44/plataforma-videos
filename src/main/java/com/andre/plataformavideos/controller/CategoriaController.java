@@ -5,6 +5,7 @@ import com.andre.plataformavideos.dto.VideoDto;
 import com.andre.plataformavideos.service.CategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -20,25 +21,28 @@ public class CategoriaController {
     @Autowired
     private CategoriasService service;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping(value = "/")
-    public ResponseEntity<List<CategoriaDto>> findAllCategpras(){
+    public ResponseEntity<List<CategoriaDto>> findAllCategorias(){
         List<CategoriaDto> dto = service.findAllCategorias();
         return ResponseEntity.ok().body(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping (value = "/{id}/")
     public ResponseEntity<CategoriaDto> findById (@PathVariable Long id){
         CategoriaDto dto = service.FindById(id);
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping(value = "/{id}/videos/")
     public ResponseEntity <List<VideoDto>> getVideosByCategoriaId(@PathVariable Long id){
 
         List<VideoDto> videos = service.findVideosByCategoriaId(id);
         return ResponseEntity.ok(videos);
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<CategoriaDto> createCategoria (@RequestBody CategoriaDto dto){
         dto = service.createCategoria(dto);
@@ -49,6 +53,7 @@ public class CategoriaController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity updateCategoria (@PathVariable Long id, @RequestBody CategoriaDto dto){
 
@@ -56,6 +61,7 @@ public class CategoriaController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}/")
     public ResponseEntity<Void> deleteById (@PathVariable Long id){
         service.deleteById(id);

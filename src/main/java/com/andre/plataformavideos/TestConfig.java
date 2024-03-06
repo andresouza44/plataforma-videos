@@ -2,8 +2,12 @@
 package com.andre.plataformavideos;
 
 import com.andre.plataformavideos.entity.Categoria;
+import com.andre.plataformavideos.entity.Role;
+import com.andre.plataformavideos.entity.User;
 import com.andre.plataformavideos.entity.Video;
 import com.andre.plataformavideos.repositories.CategoriaRepository;
+import com.andre.plataformavideos.repositories.RoleRepository;
+import com.andre.plataformavideos.repositories.UserRepositiry;
 import com.andre.plataformavideos.repositories.VideoRepostitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,8 +28,15 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private UserRepositiry userRepositiry;
+
     @Override
     public void run(String... args) throws Exception {
+/*
 
         Categoria categoria1 = new Categoria();
         categoria1.setTitulo("LIVRE");
@@ -59,11 +70,38 @@ public class TestConfig implements CommandLineRunner {
         video4.setUrl("https://youtu.be/bpPkRBt0L_8?si=jmwpwPyCgm09pEg6");
         video4.setCategoria(categoria1);
 
-
-
         videoRepostitory.saveAll(Arrays.asList(video1, video3, video4));
 
+        Role role1 = new Role();
+        role1.setAuthority("admin");
 
+        Role role2 = new Role();
+        role2.setAuthority("user");
+
+        roleRepository.saveAll(Arrays.asList(role1,role2));
+        User user1 = new User();
+        user1.setEmail("andre@gmail.com");
+        user1.setName("Andre");
+        user1.setPassword("1234");
+       user1.addRole(role1);
+
+        User user2 = new User();
+        user2.setEmail("maria@gmail.com");
+        user2.setName("Maria");
+        user2.setPassword("1234");
+        user2.addRole(role2);
+
+        User user3 = new User();
+        user3.setEmail("davi@gmail.com");
+        user3.setName("Davi");
+        user3.setPassword("1234");
+        user3.addRole(role2);
+        user3.addRole(role1);
+
+        userRepositiry.saveAll(Arrays.asList(user1,user2,user3));
+
+
+*/
 
     }
 }

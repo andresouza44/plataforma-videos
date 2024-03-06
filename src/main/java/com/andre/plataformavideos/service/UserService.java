@@ -1,9 +1,11 @@
 package com.andre.plataformavideos.service;
 
+import com.andre.plataformavideos.dto.RoleDTO;
 import com.andre.plataformavideos.dto.UserDTO;
 import com.andre.plataformavideos.entity.Role;
 import com.andre.plataformavideos.entity.User;
 import com.andre.plataformavideos.projections.UserDetailsProjection;
+import com.andre.plataformavideos.repositories.RoleRepository;
 import com.andre.plataformavideos.repositories.UserRepositiry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,10 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepositiry repository;
+
+    @Autowired
+    private RoleService roleService;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -66,14 +72,19 @@ public class UserService implements UserDetailsService {
         String encryptPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
         user.setPassword(encryptPassword);
 
+        List<RoleDTO> roles = roleService.findAll();
 
-        if (dto.getRoles().isEmpty()){
-             user.addRole(new Role(2L,"ROLE_USER"));
+        roles.forEach(role -> dto.getRoles()
+                .forEach(dtoRole -> {
+                    if (role.getAuthority().equals(dtoRole)) {
+                        user.addRole(new Role(role.getId(), role.getAuthority()));
+                    }
+                        }
+                ));
+
+        if (user.getRoles().isEmpty()){
+            user.addRole(new Role(2L,"ROLE_USER"));
         }
-
-        dto.getRoles().forEach(role -> System.out.println(role));
-
-
         repository.save(user);
 
         return new UserDTO(user);

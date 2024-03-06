@@ -18,11 +18,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
- //   @NotBlank(message = "O nome não pode estar em branco")
     private String name;
 
- //   @NotBlank(message = "O email não pode estar em branco")
-    @Email(message = "Email inválido")
     @Column(unique = true)
     private String email;
 
@@ -143,14 +140,5 @@ public class User implements UserDetails {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
+
 }

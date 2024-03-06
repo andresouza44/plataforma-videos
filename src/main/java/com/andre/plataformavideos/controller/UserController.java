@@ -3,9 +3,11 @@ package com.andre.plataformavideos.controller;
 import com.andre.plataformavideos.dto.UserDTO;
 import com.andre.plataformavideos.dto.VideoDto;
 import com.andre.plataformavideos.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,9 +29,9 @@ public class UserController {
 
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<UserDTO> addNewUser (@RequestBody UserDTO dto){
+    public ResponseEntity<UserDTO> addNewUser (@Valid @RequestBody UserDTO dto){
         UserDTO userDTO = service.addNewUser(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(userDTO.getId()).toUri();

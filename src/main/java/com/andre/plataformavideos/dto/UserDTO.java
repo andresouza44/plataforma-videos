@@ -1,14 +1,24 @@
 package com.andre.plataformavideos.dto;
 
 import com.andre.plataformavideos.entity.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO {
     Long id;
+
+    @NotBlank(message = "O nome não pode estar em branco")
     String name;
+
+    @UniqueElements(message = "email já cadastrado")
+    @Email (message = "Digite um email válido")
+    @NotBlank(message = "O email não pode estar em branco")
     String email;
+
     String password;
 
     List<String> roles = new ArrayList<>();

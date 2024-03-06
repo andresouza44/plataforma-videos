@@ -26,6 +26,8 @@ public class Role implements GrantedAuthority {
         this.authority = authoriry;
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -66,7 +68,7 @@ public class Role implements GrantedAuthority {
         return "Role{" +
                 "id=" + id +
                 ", authority='" + authority + '\'' +
-                ", users=" + users +
+
                 '}';
     }
 }

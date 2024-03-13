@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VideoRepostitory extends JpaRepository<Video, Long> {
+public interface VideoRepository extends JpaRepository<Video, Long> {
 
     List<Video> findByTituloContainingIgnoreCase (String name);
 

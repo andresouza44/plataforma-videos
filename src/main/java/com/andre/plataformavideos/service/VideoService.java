@@ -1,13 +1,12 @@
 package com.andre.plataformavideos.service;
 
-import com.andre.plataformavideos.dto.CategoriaDto;
 import com.andre.plataformavideos.dto.VideoDto;
 import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.entity.Video;
 import com.andre.plataformavideos.exceptions.CategoriaNotFoundException;
 import com.andre.plataformavideos.exceptions.ResourceNotFoundException;
 import com.andre.plataformavideos.repositories.CategoriaRepository;
-import com.andre.plataformavideos.repositories.VideoRepostitory;
+import com.andre.plataformavideos.repositories.VideoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,14 +15,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class VideoService {
 
     @Autowired
-    VideoRepostitory repostitory;
+    VideoRepository repostitory;
 
     @Autowired
     CategoriaRepository categoriaRepository;
@@ -31,9 +29,7 @@ public class VideoService {
 
     @Transactional(readOnly = true)
     public Page<VideoDto> findAll (Pageable pageable){
-        System.out.println(pageable);
         Page<Video> result = repostitory.findAll(pageable);
-        System.out.println(result);
         return  result.map(video -> new VideoDto(video));
     }
 

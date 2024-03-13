@@ -6,7 +6,7 @@ import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.exceptions.CategoriaNotFoundException;
 import com.andre.plataformavideos.exceptions.ResourceNotFoundException;
 import com.andre.plataformavideos.repositories.CategoriaRepository;
-import com.andre.plataformavideos.repositories.VideoRepostitory;
+import com.andre.plataformavideos.repositories.VideoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,7 +24,7 @@ public class CategoriasService {
     private CategoriaRepository repository;
 
     @Autowired
-    private VideoRepostitory videoRepostitory;
+    private VideoRepository videoRepository;
 
     @Transactional(readOnly = true)
     public List<CategoriaDto> findAllCategorias(){
@@ -64,7 +64,7 @@ public class CategoriasService {
         categoria.setCor(dto.getCor());
 
         repository.save(categoria);
-        System.out.println("3" + categoria);
+
         return  new CategoriaDto(categoria);
 
     }

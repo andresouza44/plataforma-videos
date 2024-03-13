@@ -2,20 +2,18 @@ package com.andre.plataformavideos.repositories;
 
 import com.andre.plataformavideos.entity.Video;
 import com.andre.plataformavideos.tests.factory.Factory;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Profile;
 
 import java.util.Optional;
 
 @DataJpaTest
 public class VideoRepositoryTests {
     @Autowired
-    VideoRepostitory repostitory;
+    VideoRepository repostitory;
 
     private Long existId;
     private Long nonExistId;

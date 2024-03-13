@@ -3,7 +3,6 @@ package com.andre.plataformavideos.service;
 import com.andre.plataformavideos.dto.CategoriaDto;
 import com.andre.plataformavideos.dto.VideoDto;
 import com.andre.plataformavideos.entity.Categoria;
-import com.andre.plataformavideos.entity.Video;
 import com.andre.plataformavideos.exceptions.CategoriaNotFoundException;
 import com.andre.plataformavideos.exceptions.ResourceNotFoundException;
 import com.andre.plataformavideos.repositories.CategoriaRepository;
@@ -36,7 +35,7 @@ public class CategoriasService {
     }
 
     @Transactional(readOnly = true)
-    public CategoriaDto FindById(Long id){
+    public CategoriaDto findById(Long id){
         Categoria categoria = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria not found with id: "+ id));
         return   new CategoriaDto(categoria);

@@ -1,6 +1,6 @@
 INSERT INTO tb_categoria (titulo, cor) VALUES ('Educativos', '#00FFFF')
 INSERT INTO tb_categoria (titulo, cor) VALUES ('VideoClipe', '#FFFFCC')
-INSERT INTO tb_categoria (titulo, cor) VALUES ('engraçãdos', '#FFFFCC')
+INSERT INTO tb_categoria (titulo, cor) VALUES ('engraçados', '#FFFFCC')
 
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ('REAGINDO a Portfólios Dos INSCRITOS','Nesse video vou reagir ao portfolio dos inscritos e trazer alguns insights que podem te ajudar no seu portfolio.','https://youtu.be/iQk2NveOTgQ?si=OT_xMaIgfGBpbTQB',1)
 INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ('REMOVER BLOATWARES do Windows', 'Como REMOVER os BLOATWARES do Windows em 2 cliques!!','https://youtu.be/D6h-aveKM7U?si=774Wt7aOIRm1SZ_V',2)
@@ -20,7 +20,7 @@ INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ('O que é Re
  INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ( 'Qual é a diferença entre back-end e front-end?', 'Afinal, existe diferença entre back-end e front-end? Nesse Alura+, o nosso instrutor Vinícius Dias vai responder a essa questão tão recorrente no mundo do desenvolvimento.', 'https://www.youtube.com/watch?v=a-l4z6V2yXA',1)
  INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ( 'Introdução ao Postman', 'As APIs são muito utilizadas para integrações de sistemas diversos. Mas, como fazer testes com elas sem utilizar um navegador e verificar seu retorno? O Vinicius Dias explica neste vídeo utilizando a ferramenta Postman.', 'https://www.youtube.com/watch?v=op81bMbgZXs',1)
  INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ( 'O que é ORM?', 'Afinal, o que é, como funciona e para que serve um ORM? O instrutor Guilherme Lima explica neste Alura+ com exemplos práticos e simplificados.', 'https://www.youtube.com/watch?v=x39vqeBTUmE',1)
- INSERT INTO tb_video (titulo, descricao, url, categoria_id) VALUES ( 'O que é Deep Learning?', 'Afinal, o que é Deep Learning e onde se aplica? O Gui Silveira explica neste vídeo além de outros conceitos que rodeiam este tema como as redes neurais densas, estimadores, classificadores e mais.', 'https://www.youtube.com/watch?v=kryIBKPVZ7A,1'
+
 
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN')

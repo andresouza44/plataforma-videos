@@ -31,7 +31,7 @@ public class CategoriaController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping (value = "/{id}/")
     public ResponseEntity<CategoriaDto> findById (@PathVariable Long id){
-        CategoriaDto dto = service.FindById(id);
+        CategoriaDto dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
 

@@ -5,7 +5,7 @@ import com.andre.plataformavideos.entity.Categoria;
 import com.andre.plataformavideos.exceptions.CategoriaNotFoundException;
 import com.andre.plataformavideos.exceptions.ResourceNotFoundException;
 import com.andre.plataformavideos.repositories.CategoriaRepository;
-import com.andre.plataformavideos.service.CategoriasService;
+import com.andre.plataformavideos.service.CategoriaService;
 import com.andre.plataformavideos.tests.factory.Factory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 public class CategoriaServiceTests {
 
     @InjectMocks
-    private CategoriasService service;
+    private CategoriaService service;
 
     @Mock
     private CategoriaRepository repository;

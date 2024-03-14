@@ -2,7 +2,7 @@ package com.andre.plataformavideos.controller;
 
 import com.andre.plataformavideos.dto.CategoriaDto;
 import com.andre.plataformavideos.dto.VideoDto;
-import com.andre.plataformavideos.service.CategoriasService;
+import com.andre.plataformavideos.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +19,7 @@ import java.util.List;
 public class CategoriaController {
 
     @Autowired
-    private CategoriasService service;
+    private CategoriaService service;
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping(value = "/")
@@ -42,7 +42,8 @@ public class CategoriaController {
         List<VideoDto> videos = service.findVideosByCategoriaId(id);
         return ResponseEntity.ok(videos);
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping
     public ResponseEntity<CategoriaDto> createCategoria (@RequestBody CategoriaDto dto){
         dto = service.createCategoria(dto);
@@ -52,6 +53,7 @@ public class CategoriaController {
 
         return ResponseEntity.created(uri).body(dto);
     }
+
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")

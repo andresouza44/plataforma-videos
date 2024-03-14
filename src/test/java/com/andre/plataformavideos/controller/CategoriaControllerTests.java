@@ -5,15 +5,12 @@ import com.andre.plataformavideos.exceptions.ResourceNotFoundException;
 import com.andre.plataformavideos.service.CategoriaService;
 import com.andre.plataformavideos.tests.factory.Factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.PreUpdate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -49,7 +46,7 @@ public class CategoriaControllerTests {
         nonExistId = 2L;
         indentedId = 3L;
 
-        categoriaDto = Factory.CreateCategoriaDTO();
+        categoriaDto = Factory.createCategoriaDTO();
 
         Mockito.when(service.findAllCategorias()).thenReturn(List.of(categoriaDto));
         Mockito.when(service.findById(existId)).thenReturn(categoriaDto);
@@ -62,7 +59,7 @@ public class CategoriaControllerTests {
 
     }
     @Test
-    @WithMockUser(username = "admin",roles = "{ADMIN}")
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
     public void deleteShouldDeleteWhenIdExist() throws Exception {
         ResultActions result = mockMvc.perform(MockMvcRequestBuilders
                 .delete("/categorias/{id}/",existId)
@@ -74,7 +71,7 @@ public class CategoriaControllerTests {
 
 
     @Test
-    @WithMockUser(username = "admin",roles = "{ADMIN}")
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
     public void createShouldReturnCategoriaDto() throws Exception {
         // TODO - ERRO 403 FORBIDDEN
         String jsonBody = objectMapper.writeValueAsString(categoriaDto);
@@ -88,7 +85,7 @@ public class CategoriaControllerTests {
 
 
     @Test
-    @WithMockUser(username = "admin", roles = "{ADMIN}")
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
     public void updateShouldReturnCategoriaDtoWhenIdExist() throws Exception {
         // TODO - ERRO 403 FORBIDDEN
         String jsonBody = objectMapper.writeValueAsString(categoriaDto);
@@ -106,7 +103,7 @@ public class CategoriaControllerTests {
 
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
     public void findAllShouldReturnCategoriaDtoList() throws Exception {
         ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/categorias/")
                 .accept(APPLICATION_JSON));
@@ -115,7 +112,7 @@ public class CategoriaControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = "{ADMIN}")
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
     public void findByIdShouldReturnCategoriaDtoWhenIdExist() throws Exception {
         ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/categorias/{id}/", existId)
                 .accept(APPLICATION_JSON));
@@ -128,11 +125,9 @@ public class CategoriaControllerTests {
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = "{ADMIN}")
+    @WithMockUser(username = "admin",roles = {"ADMIN"})
     public void findByIdShouldReturnNotFoundWhenIdDoesNotExits() throws Exception {
         ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/categorias/{id}/", nonExistId));
         result.andExpect(status().isNotFound());
     }
-
-
 }

@@ -22,4 +22,7 @@
 - Verificações para garantir a existência das Roles antes do cadastro.
 - Apenas usuários com permissões de ADMIN podem cadastrar novos usuários.
 
+### Teste
+- Testes Unitários
+- Testes de Integração
 

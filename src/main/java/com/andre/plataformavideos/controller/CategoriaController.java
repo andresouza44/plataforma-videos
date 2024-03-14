@@ -15,7 +15,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/categorias")
-@CrossOrigin("http://localhost:3000")
+//@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class CategoriaController {
 
     @Autowired
@@ -53,7 +54,6 @@ public class CategoriaController {
 
         return ResponseEntity.created(uri).body(dto);
     }
-
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")

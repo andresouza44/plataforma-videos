@@ -12,7 +12,7 @@ public class Factory {
         return categoria;
     }
 
-    public static CategoriaDto CreateCategoriaDTO (){
+    public static CategoriaDto createCategoriaDTO(){
         CategoriaDto categoriaDto = new CategoriaDto(creatCategoria());
         return categoriaDto;
     }

@@ -47,7 +47,7 @@ public class CategoriaServiceTests {
         dependentId = 3L;
         countCategoriaNumber = 3;
         categoria = Factory.creatCategoria();
-        categoriaDto = Factory.CreateCategoriaDTO();
+        categoriaDto = Factory.createCategoriaDTO();
 
         when(repository.findAll()).thenReturn(List.of(categoria));
         when(repository.findById(existId)).thenReturn(Optional.of(categoria));
